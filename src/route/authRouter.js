@@ -46,5 +46,16 @@ async function loginUser(req,res){
     res.cookie("token",token,);
     return res.status(200).json({message:"Login successful"});
 }
+router.post("/login",loginUser);
+async function logoutUser(req,res){
+    try{res.clearCookie("token");
+    return res.status(200).json({message:"Logout successful"});
+} catch (error) {
+    return res.status(500).json({message:"Error occurred while logging out"});
+}
+}
+router.post("/logout",logoutUser);    
 module.exports=router;
-
+module.exports=registerUser;
+module.exports=loginUser;
+module.exports=logoutUser;
