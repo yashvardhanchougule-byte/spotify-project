@@ -1,8 +1,19 @@
-const app= require("./src/app.js");
-const dbconnect= require("./src/db/db.js");
+
 require("dotenv").config();
 
-app.listen(3000, async () => {
-    await dbconnect();
-    console.log("Server is running on port 3000");
-});
+const app = require("./src/app");
+const dbconnect = require("./src/db/db");
+
+async function startServer() {
+    try {
+        await dbconnect();
+
+        app.listen(3000, () => {
+            console.log("Server is running on port 3000");
+        });
+    } catch (error) {
+        console.error("Failed to start server:", error);
+    }
+}
+
+startServer();
